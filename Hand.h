@@ -1,8 +1,12 @@
 #ifndef HAND_H
 #define HAND_H
 
+#include <vector>
+#include "Card.h"
+
 struct Hand {
-    int value = 0;
+    std::vector<Card> cards;
+    int value;
 };
 
 #endif
