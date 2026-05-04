@@ -1,12 +1,12 @@
 #ifndef HAND_H
 #define HAND_H
 
+#include <vector>
+#include "Card.h"
+
 class Hand {
 public:
-    int value;
-
-    Hand() : value(0) {}
-    Hand(int value) : value(value) {}
+    std::vector<Card> cards;
 };
 
 #endif

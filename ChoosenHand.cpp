@@ -8,7 +8,7 @@ void ChoosenHand::chooseHand(const Hand& hand) {
     selectedHand = hand;
     isChoosen = true;
 
-    std::cout << "Hand choosen with value: " << selectedHand.value << "\n";
+    std::cout << "Hand choosen with: " << selectedHand.cards.size() << " cards\n";
 }
 
 Hand ChoosenHand::getHand() const {
