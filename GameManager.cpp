@@ -2,23 +2,22 @@
 #include "GameManager.h"
 
 void GameManager::runSession() {
-    std::cout << "=== RUN START ===\n";
+    std::cout << "=== Run Started ===\n";
 
-    // 1. Generate Hand
-    Hand hand = handGenerator.generateHand();
+    Hand generatedHand = handGenerator.generateHand();
 
-    // 2. Play Hand
-    handPlayer.playHand();
+    choosenHand.chooseHand(generatedHand);
 
-    // 3. Score Hand
+    Hand hand = choosenHand.getHand();
+
+    handPlayer.playHand(hand);
+
     int score = scoringRule.scoreHand(hand);
 
-    // 4. Check Win Condition
     bool win = blindRule.checkBlind(score);
 
-    // 5. Earn Reward
     int reward = rewardRule.earnMoney(win, score);
 
-    std::cout << "Final Reward: " << reward << "\n";
-    std::cout << "=== RUN END ===\n";
+    std::cout << "Money gained: " << reward << "\n";
+    std::cout << "=== Run Ended ===\n";
 }

@@ -6,6 +6,7 @@
 #include "ScoringRule.h"
 #include "BlindRule.h"
 #include "RewardRule.h"
+#include "ChoosenHand.h"
 
 class GameManager {
 public:
@@ -17,6 +18,7 @@ private:
     ScoringRule scoringRule;
     BlindRule blindRule;
     RewardRule rewardRule;
+    ChoosenHand choosenHand;
 };
 
 #endif

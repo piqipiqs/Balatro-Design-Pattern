@@ -1,8 +1,12 @@
 #ifndef HAND_H
 #define HAND_H
 
-struct Hand {
-    int value = 0;
+class Hand {
+public:
+    int value;
+
+    Hand() : value(0) {}
+    Hand(int value) : value(value) {}
 };
 
 #endif
