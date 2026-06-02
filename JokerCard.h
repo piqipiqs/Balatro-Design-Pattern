@@ -1,19 +1,27 @@
 #ifndef JOKER_CARD_H
 #define JOKER_CARD_H
 
+#include <string>
+#include <utility>
+#include "ScoreEvent.h"
+
 class IJokerCard {
+private:
+    std::string name;
+    std::string description;
+
 public:
+    IJokerCard(std::string name, std::string description) 
+        : name(std::move(name)), description(std::move(description)) {}
     virtual ~IJokerCard() = default;
 
-    // Return true if the Joker acts as a wildcard
-    virtual bool isWildcard() const = 0;
+    virtual std::string getName() const { return name; }
+    virtual std::string getDescription() const { return description; }
 
-    // Get the represented value when used as a substitute
-    // Returns -1 if not applicable
-    virtual int substitutedValue() const = 0;
+    // Observer pattern update method
+    virtual void update(ScoreEvent& event) = 0;
 
-    // Set the joker to act as a wildcard or not
-    virtual void setWildcard(bool wildcard) = 0;
+  
 };
 
 #endif // JOKER_CARD_H
