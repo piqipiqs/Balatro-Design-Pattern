@@ -1,8 +1,7 @@
 #pragma once
 
-#include <unordered_map>
-#include <vector>
-#include <string>
+#include <map>
+#include "PokerHand.h"
 
 class HandScoreTable
 {
@@ -11,9 +10,14 @@ public:
     ~HandScoreTable();
 
     void Initialize();
-    int GetScore(const std::string& handType) const;
-    std::vector<std::string> GetAllHandTypes() const;
+
+    int getChips(PokerHand hand) const;
+    int getMultiplier(PokerHand hand) const;
+
+    void upgradeChips(PokerHand hand, int amount);
+    void upgradeMultiplier(PokerHand hand, int amount);
 
 private:
-    std::unordered_map<std::string, int> scoreTable;
+    std::map<PokerHand, int> chipsTable;
+    std::map<PokerHand, int> multiplierTable;
 };
