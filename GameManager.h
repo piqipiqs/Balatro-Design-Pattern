@@ -12,6 +12,7 @@
 class GameManager {
 public:
     void runSession();
+    void addJoker(std::unique_ptr<JokerCard> joker);
 
 private:
     HandGenerator handGenerator;

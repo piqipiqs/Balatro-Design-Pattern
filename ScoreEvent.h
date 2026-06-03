@@ -1,13 +1,14 @@
 #ifndef SCOREEVENT_H
 #define SCOREEVENT_H
 
-class ScoreEvent
-{
-public:
-    virtual ~ScoreEvent() = default;
+#include "Hand.h"
+#include "HandRank.h"
 
-    // Returns the score change associated with this event.
-    virtual int getScoreChange() const = 0;
+struct ScoreEvent {
+    Hand hand;
+    HandRank handRank;
+    int chips;
+    float mult;
 };
 
 #endif // SCOREEVENT_H

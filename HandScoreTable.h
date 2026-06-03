@@ -1,7 +1,8 @@
-#pragma once
+#ifndef HANDSCORETABLE_H
+#define HANDSCORETABLE_H
 
 #include <map>
-#include "PokerHand.h"
+#include "HandRank.h"
 
 class HandScoreTable
 {
@@ -9,15 +10,17 @@ public:
     HandScoreTable();
     ~HandScoreTable();
 
-    void Initialize();
+    void initialize();
 
-    int getChips(PokerHand hand) const;
-    int getMultiplier(PokerHand hand) const;
+    int getChips(HandRank hand) const;
+    int getMultiplier(HandRank hand) const;
 
-    void upgradeChips(PokerHand hand, int amount);
-    void upgradeMultiplier(PokerHand hand, int amount);
+    void upgradeChips(HandRank hand, int amount);
+    void upgradeMultiplier(HandRank hand, int amount);
 
 private:
-    std::map<PokerHand, int> chipsTable;
-    std::map<PokerHand, int> multiplierTable;
+    std::map<HandRank, int> chipsTable;
+    std::map<HandRank, int> multiplierTable;
 };
+
+#endif // HANDSCORETABLE_H
