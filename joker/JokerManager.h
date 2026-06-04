@@ -4,7 +4,7 @@
 #include <vector>
 #include <memory>
 #include "JokerCard.h"
-#include "ScoreEvent.h"
+#include "../ScoreEvent.h"
 
 class JokerManager {
 public:
