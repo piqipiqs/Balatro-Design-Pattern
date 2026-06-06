@@ -15,9 +15,8 @@ bool isFlush(const Hand& hand) {
 }
 
 HandRank FlushChecker::check(const Hand& hand) {
-    std::cout << "Checking FLUSH...\n";
     if (isFlush(hand)) {
-        std::cout << "Detected FLUSH\n";
+        std::cout << "Detected Flush\n";
         return HandRank::FLUSH;
     }
     if (nextChecker) {

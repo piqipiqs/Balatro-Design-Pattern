@@ -22,9 +22,8 @@ bool isFullHouse(const Hand& hand) {
 }
 
 HandRank FullHouseChecker::check(const Hand& hand) {
-    std::cout << "Checking FULL HOUSE...\n";
     if (isFullHouse(hand)) {
-        std::cout << "Detected FULL HOUSE\n";
+        std::cout << "Detected Full House\n";
         return HandRank::FULL_HOUSE;
     }
     if (nextChecker) {

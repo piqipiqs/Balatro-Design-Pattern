@@ -14,9 +14,8 @@ bool isFiveOfAKind(const Hand& hand) {
 }
 
 HandRank FiveOfAKindChecker::check(const Hand& hand) {
-    std::cout << "Checking FIVE OF A KIND...\n";
     if (isFiveOfAKind(hand)) {
-        std::cout << "Detected FIVE OF A KIND\n";
+        std::cout << "Detected Five of a Kind\n";
         return HandRank::FIVE_OF_A_KIND;
     }
     if (nextChecker) {

@@ -34,9 +34,8 @@ bool isRoyalFlush(const Hand& hand) {
 }
 
 HandRank RoyalFlushChecker::check(const Hand& hand) {
-    std::cout << "Checking ROYAL FLUSH...\n";
     if (isRoyalFlush(hand)) {
-        std::cout << "Detected ROYAL FLUSH\n";
+        std::cout << "Detected Royal Flush\n";
         return HandRank::ROYAL_FLUSH;
     }
     if (nextChecker) {

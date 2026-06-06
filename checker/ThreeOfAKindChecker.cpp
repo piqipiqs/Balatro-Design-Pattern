@@ -17,9 +17,8 @@ bool isThreeOfAKind(const Hand& hand) {
 }
 
 HandRank ThreeOfAKindChecker::check(const Hand& hand) {
-    std::cout << "Checking THREE OF A KIND...\n";
     if (isThreeOfAKind(hand)) {
-        std::cout << "Detected THREE OF A KIND\n";
+        std::cout << "Detected Three of a Kind\n";
         return HandRank::THREE_OF_A_KIND;
     }
     if (nextChecker) {

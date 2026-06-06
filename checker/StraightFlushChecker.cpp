@@ -40,9 +40,8 @@ bool isStraightFlush(const Hand& hand) {
 }
 
 HandRank StraightFlushChecker::check(const Hand& hand) {
-    std::cout << "Checking STRAIGHT FLUSH...\n";
     if (isStraightFlush(hand)) {
-        std::cout << "Detected STRAIGHT FLUSH\n";
+        std::cout << "Detected Straight Flush\n";
         return HandRank::STRAIGHT_FLUSH;
     }
     if (nextChecker) {

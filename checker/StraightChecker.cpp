@@ -29,9 +29,8 @@ bool isStraight(const Hand& hand) {
 }
 
 HandRank StraightChecker::check(const Hand& hand) {
-    std::cout << "Checking STRAIGHT...\n";
     if (isStraight(hand)) {
-        std::cout << "Detected STRAIGHT\n";
+        std::cout << "Detected Straight\n";
         return HandRank::STRAIGHT;
     }
     if (nextChecker) {

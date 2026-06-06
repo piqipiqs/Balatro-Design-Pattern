@@ -13,9 +13,8 @@ bool isPair(const Hand& hand) {
 }
 
 HandRank PairChecker::check(const Hand& hand) {
-    std::cout << "Checking PAIR...\n";
     if (isPair(hand)) {
-        std::cout << "Detected PAIR\n";
+        std::cout << "Detected Pair\n";
         return HandRank::PAIR;
     }
     if (nextChecker) {

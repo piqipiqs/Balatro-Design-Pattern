@@ -35,9 +35,8 @@ bool isFlushHouse(const Hand& hand) {
 }
 
 HandRank FlushHouseChecker::check(const Hand& hand) {
-    std::cout << "Checking FLUSH HOUSE...\n";
     if (isFlushHouse(hand)) {
-        std::cout << "Detected FLUSH HOUSE\n";
+        std::cout << "Detected Flush House\n";
         return HandRank::FLUSH_HOUSE;
     }
     if (nextChecker) {

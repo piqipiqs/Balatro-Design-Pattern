@@ -22,9 +22,8 @@ bool isTwoPair(const Hand& hand) {
 }
 
 HandRank TwoPairChecker::check(const Hand& hand) {
-    std::cout << "Checking TWO PAIR...\n";
     if (isTwoPair(hand)) {
-        std::cout << "Detected TWO PAIR\n";
+        std::cout << "Detected Two Pair\n";
         return HandRank::TWO_PAIR;
     }
     if (nextChecker) {

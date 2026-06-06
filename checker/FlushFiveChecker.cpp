@@ -25,9 +25,8 @@ bool isFlushFive(const Hand& hand) {
 }
 
 HandRank FlushFiveChecker::check(const Hand& hand) {
-    std::cout << "Checking FLUSH FIVE...\n";
     if (isFlushFive(hand)) {
-        std::cout << "Detected FLUSH FIVE\n";
+        std::cout << "Detected Flush Five\n";
         return HandRank::FLUSH_FIVE;
     }
     if (nextChecker) {

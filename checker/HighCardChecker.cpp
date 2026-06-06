@@ -6,9 +6,8 @@ bool isHighCard(const Hand& hand) {
 }
 
 HandRank HighCardChecker::check(const Hand& hand) {
-    std::cout << "Checking HIGH CARD...\n";
     if (isHighCard(hand)) {
-        std::cout << "Detected HIGH CARD\n";
+        std::cout << "Detected High Card\n";
         return HandRank::HIGH_CARD;
     }
     if (nextChecker) {

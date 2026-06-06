@@ -17,9 +17,8 @@ bool isFourOfAKind(const Hand& hand) {
 }
 
 HandRank FourOfAKindChecker::check(const Hand& hand) {
-    std::cout << "Checking FOUR OF A KIND...\n";
     if (isFourOfAKind(hand)) {
-        std::cout << "Detected FOUR OF A KIND\n";
+        std::cout << "Detected Four of a Kind\n";
         return HandRank::FOUR_OF_A_KIND;
     }
     if (nextChecker) {
