@@ -7,11 +7,12 @@
 #include "BlindRule.h"
 #include "RewardRule.h"
 #include "ChoosenHand.h"
-#include "JokerManager.h"
+#include "joker/JokerManager.h"
 
 class GameManager {
 public:
     void runSession();
+    void addJoker(std::unique_ptr<JokerCard> joker);
 
 private:
     HandGenerator handGenerator;

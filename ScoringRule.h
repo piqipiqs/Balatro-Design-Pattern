@@ -2,6 +2,8 @@
 #define SCORINGRULE_H
 
 #include "Hand.h"
+#include "ScoreResult.h"
+#include "HandScoreTable.h"
 #include "checker/FlushFiveChecker.h"
 #include "checker/FlushHouseChecker.h"
 #include "checker/FiveOfAKindChecker.h"
@@ -19,9 +21,11 @@
 class ScoringRule {
 public:
     ScoringRule();
-    int scoreHand(const Hand& hand);
+    ScoreResult scoreHand(const Hand& hand);
 
 private:
+    HandScoreTable scoreTable;
+
     FlushFiveChecker flushFive;
     FlushHouseChecker flushHouse;
     FiveOfAKindChecker fiveKind;
