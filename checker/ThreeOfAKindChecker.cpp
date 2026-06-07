@@ -1,29 +1,29 @@
 #include <iostream>
 #include "ThreeOfAKindChecker.h"
 
-bool isThreeOfAKind(const Hand& hand) {
+std::vector<Card> getThreeOfAKindCards(const Hand& hand) {
     for (int i = 0; i < hand.cards.size(); i++) {
-        int count = 1;
-        for (int j = i + 1; j < hand.cards.size(); j++) {
+        int count = 0;
+        std::vector<Card> scoring;
+        for (int j = 0; j < hand.cards.size(); j++) {
             if (hand.cards[j].rank == hand.cards[i].rank) {
                 count++;
+                scoring.push_back(hand.cards[j]);
             }
         }
-        if (count >= 3) {
-            return true;
+        if (count == 3) {
+            return scoring;
         }
     }
-    return false;
+    return {};
 }
 
-HandRank ThreeOfAKindChecker::check(const Hand& hand) {
-    std::cout << "Checking THREE OF A KIND...\n";
-    if (isThreeOfAKind(hand)) {
-        std::cout << "Detected THREE OF A KIND\n";
-        return HandRank::THREE_OF_A_KIND;
+ScoreResult ThreeOfAKindChecker::check(const Hand& hand) {
+    std::vector<Card> scoring = getThreeOfAKindCards(hand);
+    if (!scoring.empty()) {
+        std::cout << "Detected Three of a Kind\n";
+        return { HandRank::THREE_OF_A_KIND, 0, 0.0f, scoring };
     }
-    if (nextChecker) {
-        return nextChecker->check(hand);
-    }
-    return HandRank::HIGH_CARD;
+    if (nextChecker) return nextChecker->check(hand);
+    return { HandRank::HIGH_CARD, 0, 0.0f, {} };
 }

@@ -24,14 +24,13 @@ bool isFlushFive(const Hand& hand) {
     return true;
 }
 
-HandRank FlushFiveChecker::check(const Hand& hand) {
-    std::cout << "Checking FLUSH FIVE...\n";
+ScoreResult FlushFiveChecker::check(const Hand& hand) {
     if (isFlushFive(hand)) {
-        std::cout << "Detected FLUSH FIVE\n";
-        return HandRank::FLUSH_FIVE;
+        std::cout << "Detected Flush Five\n";
+        return { HandRank::FLUSH_FIVE, 0, 0.0f, hand.cards };
     }
     if (nextChecker) {
         return nextChecker->check(hand);
     }
-    return HandRank::HIGH_CARD;
+    return { HandRank::HIGH_CARD, 0, 0.0f, {} };
 }

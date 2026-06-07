@@ -1,27 +1,24 @@
-#ifndef JOKER_CARD_H
-#define JOKER_CARD_H
+#ifndef JOKERCARD_H
+#define JOKERCARD_H
 
 #include <string>
 #include <utility>
-#include "ScoreEvent.h"
+#include "../ScoreEvent.h"
 
-class IJokerCard {
+class JokerCard {
 private:
     std::string name;
     std::string description;
 
 public:
-    IJokerCard(std::string name, std::string description) 
+    JokerCard(std::string name, std::string description)
         : name(std::move(name)), description(std::move(description)) {}
-    virtual ~IJokerCard() = default;
+    virtual ~JokerCard() = default;
 
     virtual std::string getName() const { return name; }
     virtual std::string getDescription() const { return description; }
 
-    // Observer pattern update method
-    virtual void update(ScoreEvent& event) = 0;
-
-  
+    virtual void onScoreCalculated(ScoreEvent& event) {}
 };
 
-#endif // JOKER_CARD_H
+#endif // JOKERCARD_H

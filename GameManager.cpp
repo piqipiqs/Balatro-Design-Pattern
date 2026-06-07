@@ -1,23 +1,25 @@
 #include <iostream>
 #include "GameManager.h"
+#include "BlindSession.h"
 
-void GameManager::runSession() {
-    std::cout << "=== Run Started ===\n";
+GameManager::GameManager()
+    : handPlayer(scoringRule, jokerManager) {}
 
-    Hand generatedHand = handGenerator.generateHand();
-
-    choosenHand.chooseHand(generatedHand);
-
-    Hand hand = choosenHand.getHand();
-
-    handPlayer.playHand(hand);
-
-    int score = scoringRule.scoreHand(hand);
-
-    bool win = blindRule.checkBlind(score);
-
-    int reward = rewardRule.earnMoney(win, score);
-
-    std::cout << "Money gained: " << reward << "\n";
-    std::cout << "=== Run Ended ===\n";
+void GameManager::addJoker(std::unique_ptr<JokerCard> joker) {
+    jokerManager.addJoker(std::move(joker));
 }
+
+void GameManager::run(int blindTarget) {
+    BlindRule blindRule(blindTarget);
+    BlindSession session(handPlayer, blindRule);
+
+    bool won = session.run();
+
+    if (won) {
+        std::cout << "You defeated the blind!\n";
+    }
+    else {
+        std::cout << "You failed the blind.\n";
+    }
+}
+

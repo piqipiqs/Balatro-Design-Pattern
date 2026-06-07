@@ -2,7 +2,6 @@
 #include "ScoringRule.h"
 
 ScoringRule::ScoringRule() {
-
     flushFive.setNext(&flushHouse);
     flushHouse.setNext(&fiveKind);
     fiveKind.setNext(&royalFlush);
@@ -17,8 +16,13 @@ ScoringRule::ScoringRule() {
     pair.setNext(&highCard);
 }
 
-int ScoringRule::scoreHand(const Hand& hand) {
-    std::cout << "Scoring...\n";
-    flushFive.check(hand);
-    return 0;
+ScoreResult ScoringRule::scoreHand(const Hand& hand) {
+    ScoreResult result = flushFive.check(hand);
+
+    result.chips = scoreTable.getChips(result.handRank);
+    result.mult = static_cast<float>(scoreTable.getMultiplier(result.handRank));
+
+    std::cout << "Base Score: chips = " << result.chips << " x mult = " << result.mult << "\n";
+
+    return result;
 }

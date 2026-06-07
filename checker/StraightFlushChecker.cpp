@@ -39,14 +39,13 @@ bool isStraightFlush(const Hand& hand) {
     return straight;
 }
 
-HandRank StraightFlushChecker::check(const Hand& hand) {
-    std::cout << "Checking STRAIGHT FLUSH...\n";
+ScoreResult StraightFlushChecker::check(const Hand& hand) {
     if (isStraightFlush(hand)) {
-        std::cout << "Detected STRAIGHT FLUSH\n";
-        return HandRank::STRAIGHT_FLUSH;
+        std::cout << "Detected Straight Flush\n";
+        return { HandRank::STRAIGHT_FLUSH, 0, 0.0f, hand.cards };
     }
     if (nextChecker) {
         return nextChecker->check(hand);
     }
-    return HandRank::HIGH_CARD;
+    return { HandRank::HIGH_CARD, 0, 0.0f, {} };
 }

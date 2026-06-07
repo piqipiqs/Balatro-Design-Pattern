@@ -1,18 +1,23 @@
 #include <iostream>
 #include "HighCardChecker.h"
 
-bool isHighCard(const Hand& hand) {
-    return !hand.cards.empty();
+std::vector<Card> getHighCard(const Hand& hand) {
+    if (hand.cards.empty()) return {};
+    Card highest = hand.cards[0];
+    for (const Card& c : hand.cards) {
+        if (static_cast<int>(c.rank) > static_cast<int>(highest.rank)) {
+            highest = c;
+        }
+    }
+    return { highest };
 }
 
-HandRank HighCardChecker::check(const Hand& hand) {
-    std::cout << "Checking HIGH CARD...\n";
-    if (isHighCard(hand)) {
-        std::cout << "Detected HIGH CARD\n";
-        return HandRank::HIGH_CARD;
+ScoreResult HighCardChecker::check(const Hand& hand) {
+    std::vector<Card> scoring = getHighCard(hand);
+    if (!scoring.empty()) {
+        std::cout << "Detected High Card\n";
+        return { HandRank::HIGH_CARD, 0, 0.0f, scoring };
     }
-    if (nextChecker) {
-        return nextChecker->check(hand);
-    }
-    return HandRank::HIGH_CARD;
+    if (nextChecker) return nextChecker->check(hand);
+    return { HandRank::HIGH_CARD, 0, 0.0f, {} };
 }

@@ -1,6 +1,12 @@
-#include <iostream>
 #include "BlindRule.h"
-bool BlindRule::checkBlind(int score) {
-    std::cout << "Checking...\n";
-    return score >= 5;
+
+BlindRule::BlindRule(int target)
+    : target(target) {}
+
+int BlindRule::getTarget() const {
+    return target;
+}
+
+bool BlindRule::isDefeated(int score) const {
+    return score >= target;
 }
