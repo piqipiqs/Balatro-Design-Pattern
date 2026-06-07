@@ -31,6 +31,13 @@ std::vector<Card> Deck::draw(int n) {
     return drawn;
 }
 
+void Deck::injectCard(const Card& card) {
+    // Insert at a random position so it shuffles naturally
+    std::mt19937 rng(std::random_device{}());
+    std::uniform_int_distribution<int> dist(0, static_cast<int>(cards.size()));
+    cards.insert(cards.begin() + dist(rng), card);
+}
+
 int Deck::remaining() const {
     return static_cast<int>(cards.size());
 }
