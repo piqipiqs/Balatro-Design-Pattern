@@ -1,7 +1,11 @@
 #ifndef REWARDRULE_H
 #define REWARDRULE_H
+
 class RewardRule {
 public:
-    int earnMoney(bool win, int score);
+    // Returns total money earned after clearing a blind
+    // base reward + $1 per remaining hand
+    int earnMoney(int baseReward, int remainingHands);
 };
+
 #endif

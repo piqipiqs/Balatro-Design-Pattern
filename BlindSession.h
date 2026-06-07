@@ -5,25 +5,20 @@
 #include "HandState.h"
 #include "HandPlayer.h"
 #include "BlindRule.h"
+#include "RunSessionState.h"
 
 class BlindSession {
 public:
-    static const int MAX_HANDS = 4;
-    static const int MAX_DISCARDS = 3;
-
-    BlindSession(HandPlayer& handPlayer, BlindRule blindRule);
+    BlindSession(HandPlayer& handPlayer, BlindRule blindRule, RunSessionState& session);
 
     bool run(); // returns true if blind defeated
 
 private:
     HandPlayer& handPlayer;
     BlindRule blindRule;
+    RunSessionState& session;
     Deck deck;
     HandState handState;
-
-    int handsLeft;
-    int discardsLeft;
-    int currentScore;
 
     void displayState() const;
     void displayCards() const;
