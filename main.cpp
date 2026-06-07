@@ -12,6 +12,8 @@ int main() {
     gm.addJoker(std::make_unique<FlushJoker>());
     gm.addJoker(std::make_unique<HeartJoker>());
     gm.addJoker(std::make_unique<FaceCardJoker>());
-    gm.runSession();
+
+    gm.run(300);
+
     return 0;
 }
