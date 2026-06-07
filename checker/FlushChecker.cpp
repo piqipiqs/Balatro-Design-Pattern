@@ -14,13 +14,13 @@ bool isFlush(const Hand& hand) {
     return true;
 }
 
-HandRank FlushChecker::check(const Hand& hand) {
+ScoreResult FlushChecker::check(const Hand& hand) {
     if (isFlush(hand)) {
         std::cout << "Detected Flush\n";
-        return HandRank::FLUSH;
+        return { HandRank::FLUSH, 0, 0.0f, hand.cards };
     }
     if (nextChecker) {
         return nextChecker->check(hand);
     }
-    return HandRank::HIGH_CARD;
+    return { HandRank::HIGH_CARD, 0, 0.0f, {} };
 }

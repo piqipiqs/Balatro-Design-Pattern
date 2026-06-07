@@ -17,13 +17,12 @@ ScoringRule::ScoringRule() {
 }
 
 ScoreResult ScoringRule::scoreHand(const Hand& hand) {
-    std::cout << "Scoring...\n";
+    ScoreResult result = flushFive.check(hand);
 
-    HandRank rank = flushFive.check(hand);
-    int chips = scoreTable.getChips(rank);
-    float mult = static_cast<float>(scoreTable.getMultiplier(rank));
+    result.chips = scoreTable.getChips(result.handRank);
+    result.mult = static_cast<float>(scoreTable.getMultiplier(result.handRank));
 
-    std::cout << "Hand: chips = " << chips << " x mult = " << mult << "\n";
+    std::cout << "Base Score: chips = " << result.chips << " x mult = " << result.mult << "\n";
 
-    return ScoreResult{ rank, chips, mult };
+    return result;
 }

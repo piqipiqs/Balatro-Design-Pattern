@@ -29,9 +29,6 @@ private:
     void displayCards() const;
     std::vector<int> promptCardSelection(int maxSelect) const;
     char promptAction() const;
-
-    static const char* rankToString(Rank rank);
-    static const char* suitToString(Suit suit);
 };
 
 #endif

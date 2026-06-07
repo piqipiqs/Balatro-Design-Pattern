@@ -21,13 +21,13 @@ bool isFullHouse(const Hand& hand) {
     return hasThree && hasPair;
 }
 
-HandRank FullHouseChecker::check(const Hand& hand) {
+ScoreResult FullHouseChecker::check(const Hand& hand) {
     if (isFullHouse(hand)) {
         std::cout << "Detected Full House\n";
-        return HandRank::FULL_HOUSE;
+        return { HandRank::FULL_HOUSE, 0, 0.0f, hand.cards };
     }
     if (nextChecker) {
         return nextChecker->check(hand);
     }
-    return HandRank::HIGH_CARD;
+    return { HandRank::HIGH_CARD, 0, 0.0f, {} };
 }

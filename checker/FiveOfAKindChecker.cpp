@@ -13,13 +13,13 @@ bool isFiveOfAKind(const Hand& hand) {
     return true;
 }
 
-HandRank FiveOfAKindChecker::check(const Hand& hand) {
+ScoreResult FiveOfAKindChecker::check(const Hand& hand) {
     if (isFiveOfAKind(hand)) {
         std::cout << "Detected Five of a Kind\n";
-        return HandRank::FIVE_OF_A_KIND;
+        return { HandRank::FIVE_OF_A_KIND, 0, 0.0f, hand.cards };
     }
     if (nextChecker) {
         return nextChecker->check(hand);
     }
-    return HandRank::HIGH_CARD;
+    return { HandRank::HIGH_CARD, 0, 0.0f, {} };
 }

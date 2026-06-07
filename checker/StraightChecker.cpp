@@ -28,13 +28,13 @@ bool isStraight(const Hand& hand) {
     return straight;
 }
 
-HandRank StraightChecker::check(const Hand& hand) {
+ScoreResult StraightChecker::check(const Hand& hand) {
     if (isStraight(hand)) {
         std::cout << "Detected Straight\n";
-        return HandRank::STRAIGHT;
+        return { HandRank::STRAIGHT, 0, 0.0f, hand.cards };
     }
     if (nextChecker) {
         return nextChecker->check(hand);
     }
-    return HandRank::HIGH_CARD;
+    return { HandRank::HIGH_CARD, 0, 0.0f, {} };
 }

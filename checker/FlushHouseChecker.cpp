@@ -34,13 +34,13 @@ bool isFlushHouse(const Hand& hand) {
     return hasThree && hasPair;
 }
 
-HandRank FlushHouseChecker::check(const Hand& hand) {
+ScoreResult FlushHouseChecker::check(const Hand& hand) {
     if (isFlushHouse(hand)) {
         std::cout << "Detected Flush House\n";
-        return HandRank::FLUSH_HOUSE;
+        return { HandRank::FLUSH_HOUSE, 0, 0.0f, hand.cards };
     }
     if (nextChecker) {
         return nextChecker->check(hand);
     }
-    return HandRank::HIGH_CARD;
+    return { HandRank::HIGH_CARD, 0, 0.0f, {} };
 }

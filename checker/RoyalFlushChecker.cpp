@@ -33,13 +33,13 @@ bool isRoyalFlush(const Hand& hand) {
     return ranks == royal;
 }
 
-HandRank RoyalFlushChecker::check(const Hand& hand) {
+ScoreResult RoyalFlushChecker::check(const Hand& hand) {
     if (isRoyalFlush(hand)) {
         std::cout << "Detected Royal Flush\n";
-        return HandRank::ROYAL_FLUSH;
+        return { HandRank::ROYAL_FLUSH, 0, 0.0f, hand.cards };
     }
     if (nextChecker) {
         return nextChecker->check(hand);
     }
-    return HandRank::HIGH_CARD;
+    return { HandRank::HIGH_CARD, 0, 0.0f, {} };
 }
