@@ -7,9 +7,9 @@ class RunSessionState;
 
 // When the reward command should be executed
 enum class RewardTiming {
-    Start,      // At the start of the run
-    NextBlind,  // At the start of the next blind
-    NextAnte    // At the start of the next ante
+    Start,      // Executes immediately when the blind is skipped
+    NextBlind,  // Executes at the start of the next blind
+    NextAnte    // Executes at the start of the next ante
 };
 
 // Abstract interface for all reward commands (Command Pattern)

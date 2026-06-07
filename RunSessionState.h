@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <memory>
+#include "Card.h"
 #include "blind/BlindState.h"
 #include "command/RewardCommand.h"
 
@@ -13,6 +14,7 @@ struct RunPersistentState {
     int money = 0;
     std::unique_ptr<BlindState> currentBlind;
     std::vector<std::unique_ptr<RewardCommand>> pendingCommands;
+    std::vector<Card> bonusCards; // Persists across all blinds
 };
 
 // --- Runtime State ---
@@ -25,7 +27,6 @@ struct BlindRuntimeState {
 
 // --- Combined Session State ---
 // Single source of truth for the current run
-// Passed to commands and blind states
 struct RunSessionState {
     RunPersistentState persistent;
     BlindRuntimeState runtime;

@@ -5,6 +5,7 @@
 
 // Boss Blind — final blind in the progression
 // Increments ante and transitions back to: SmallBlindState
+// Cannot be skipped
 class BossBlindState : public BlindState {
 public:
     explicit BossBlindState(int ante);
@@ -14,6 +15,7 @@ public:
     int getRewardMoney() const override;
     void nextState(RunSessionState& session) const override;
     std::unique_ptr<RewardCommand> createSkipReward() const override;
+    bool canSkip() const override;
 
 private:
     int ante;

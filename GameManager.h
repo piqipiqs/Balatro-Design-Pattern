@@ -11,10 +11,7 @@ class GameManager {
 public:
     GameManager();
 
-    // Add a joker to the game
     void addJoker(std::unique_ptr<JokerCard> joker);
-
-    // Start the full run loop
     void run();
 
 private:
@@ -23,17 +20,9 @@ private:
     HandPlayer handPlayer;
     RunSessionState session;
 
-    // Prompt player to play or skip the current blind
-    // Returns true if play, false if skip
     bool promptPlayOrSkip() const;
-
-    // Execute all pending commands matching the given timing
     void executePendingCommands(RewardTiming timing);
-
-    // Run a single blind session
-    void runBlindSession();
-
-    // Award money after clearing a blind
+    bool runBlindSession(); // returns true if blind defeated
     void awardMoney(int amount);
 };
 

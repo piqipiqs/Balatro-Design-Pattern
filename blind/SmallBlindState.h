@@ -14,6 +14,7 @@ public:
     int getRewardMoney() const override;
     void nextState(RunSessionState& session) const override;
     std::unique_ptr<RewardCommand> createSkipReward() const override;
+    bool canSkip() const override;
 
 private:
     int ante;
