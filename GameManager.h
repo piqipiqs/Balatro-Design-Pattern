@@ -2,9 +2,9 @@
 #define GAMEMANAGER_H
 
 #include <memory>
-#include "HandPlayer.h"
 #include "ScoringRule.h"
-#include "BlindRule.h"
+#include "HandPlayer.h"
+#include "RunSessionState.h"
 #include "joker/JokerManager.h"
 
 class GameManager {
@@ -12,12 +12,18 @@ public:
     GameManager();
 
     void addJoker(std::unique_ptr<JokerCard> joker);
-    void run(int blindTarget);
+    void run();
 
 private:
-    HandPlayer handPlayer;
     ScoringRule scoringRule;
     JokerManager jokerManager;
+    HandPlayer handPlayer;
+    RunSessionState session;
+
+    bool promptPlayOrSkip() const;
+    void executePendingCommands(RewardTiming timing);
+    bool runBlindSession(); // returns true if blind defeated
+    void awardMoney(int amount);
 };
 
 #endif
