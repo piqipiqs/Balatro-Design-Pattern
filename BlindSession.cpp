@@ -4,19 +4,22 @@
 #include <sstream>
 #include <set>
 
-BlindSession::BlindSession(HandPlayer& handPlayer, BlindRule blindRule)
+BlindSession::BlindSession(HandPlayer& handPlayer, BlindRule blindRule, RunSessionState& session)
     : handPlayer(handPlayer),
       blindRule(blindRule),
-      handsLeft(MAX_HANDS),
-      discardsLeft(MAX_DISCARDS),
-      currentScore(0) {}
+      session(session) {}
 
 bool BlindSession::run() {
     std::cout << "\n=== Blind Started | Target: " << blindRule.getTarget() << " ===\n";
 
+    // Inject any bonus cards from pending rewards into the deck
+    for (const Card& c : session.persistent.bonusCards) {
+        deck.injectCard(c);
+    }
+
     handState.refill(deck);
 
-    while (handsLeft > 0) {
+    while (session.runtime.remainingHands > 0) {
         displayState();
         displayCards();
 
@@ -32,21 +35,22 @@ bool BlindSession::run() {
 
             Hand hand = handState.getSelectedHand(indices);
             int score = handPlayer.play(hand);
-            currentScore += score;
+            session.runtime.blindScore += score;
 
             handState.removeCards(indices);
             handState.refill(deck);
-            handsLeft--;
+            session.runtime.remainingHands--;
 
-            std::cout << "Total score: " << currentScore << " / " << blindRule.getTarget() << "\n";
+            std::cout << "Total score: " << session.runtime.blindScore
+                      << " / " << blindRule.getTarget() << "\n";
 
-            if (blindRule.isDefeated(currentScore)) {
+            if (blindRule.isDefeated(session.runtime.blindScore)) {
                 std::cout << "=== Blind Defeated! ===\n";
                 return true;
             }
 
         } else if (action == 'd') {
-            if (discardsLeft <= 0) {
+            if (session.runtime.remainingDiscards <= 0) {
                 std::cout << "No discards remaining!\n";
                 continue;
             }
@@ -59,20 +63,22 @@ bool BlindSession::run() {
 
             handState.removeCards(indices);
             handState.refill(deck);
-            discardsLeft--;
+            session.runtime.remainingDiscards--;
         }
     }
 
     std::cout << "=== Out of hands! Blind failed. Final score: "
-              << currentScore << " / " << blindRule.getTarget() << " ===\n";
+              << session.runtime.blindScore
+              << " / " << blindRule.getTarget() << " ===\n";
     return false;
 }
 
 void BlindSession::displayState() const {
-    std::cout << "\n--- Hands left: " << handsLeft
-              << " | Discards left: " << discardsLeft
-              << " | Score: " << currentScore
-              << " / " << blindRule.getTarget() << " ---\n";
+    std::cout << "\n--- Hands left: " << session.runtime.remainingHands
+              << " | Discards left: " << session.runtime.remainingDiscards
+              << " | Score: " << session.runtime.blindScore
+              << " / " << blindRule.getTarget()
+              << " | Deck: " << deck.remaining() << " ---\n";
 }
 
 void BlindSession::displayCards() const {

@@ -1,6 +1,9 @@
-#include <iostream>
 #include "RewardRule.h"
-int RewardRule::earnMoney(bool win, int score) {
-    std::cout << "Reward...\n";
-    return win ? score : 0;
+#include <iostream>
+
+int RewardRule::earnMoney(int baseReward, int remainingHands) {
+    int total = baseReward + remainingHands;
+    std::cout << "Reward: $" << baseReward << " base + $" << remainingHands
+              << " (" << remainingHands << " hands remaining) = $" << total << "\n";
+    return total;
 }

@@ -20,6 +20,11 @@ public:
     // Executes the reward effect on the session state
     virtual void execute(RunSessionState& session) = 0;
 
+    // Called before execute() if the command needs player input
+    // Override this to prompt the player for a choice (e.g. pick a card)
+    // Default does nothing — only override when needed
+    virtual void resolveChoice(RunSessionState& session) {}
+
     // Returns when this command should trigger
     virtual RewardTiming getTiming() const = 0;
 

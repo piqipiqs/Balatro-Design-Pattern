@@ -4,6 +4,7 @@
 #include <memory>
 #include "ScoringRule.h"
 #include "HandPlayer.h"
+#include "RewardRule.h"
 #include "RunSessionState.h"
 #include "joker/JokerManager.h"
 
@@ -19,6 +20,7 @@ private:
     JokerManager jokerManager;
     HandPlayer handPlayer;
     RunSessionState session;
+    RewardRule rewardRule;
 
     bool promptPlayOrSkip() const;
     void executePendingCommands(RewardTiming timing);

@@ -13,7 +13,7 @@ int main() {
     gm.addJoker(std::make_unique<HeartJoker>());
     gm.addJoker(std::make_unique<FaceCardJoker>());
 
-    gm.run(300);
+    gm.run();
 
     return 0;
 }
